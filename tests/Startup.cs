@@ -70,7 +70,7 @@ namespace tests
 
 
             //app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles("/web701_so/net");
 
             app.UseRouting();
 
