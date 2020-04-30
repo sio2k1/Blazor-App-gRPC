@@ -54,7 +54,7 @@ namespace tests
             Console.WriteLine(env.WebRootPath);
             app.Use((context, next) =>
             {
-                context.Request.PathBase = new PathString("/web701_so/net");
+                //context.Request.PathBase = new PathString("/web701_so/net");
                 return next.Invoke();
             });
             
