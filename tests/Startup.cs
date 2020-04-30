@@ -50,11 +50,13 @@ namespace tests
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+            Console.WriteLine(env.WebRootPath);
             app.Use((context, next) =>
             {
-                context.Request.PathBase = new PathString("/web701_so/net");
+                //context.Request.PathBase = new PathString("/web701_so/net");
                 return next.Invoke();
             });
+            Console.WriteLine(env.WebRootPath);
             //app.UsePathBase("/web701_so/net");
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
