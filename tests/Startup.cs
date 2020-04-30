@@ -50,6 +50,7 @@ namespace tests
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+            set.www = env.WebRootPath;
             Console.WriteLine(env.WebRootPath);
             app.Use((context, next) =>
             {
@@ -92,11 +93,20 @@ namespace tests
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGet("/a", async context =>
+                {
+                    await context.Response.WriteAsync(set.www);
+                });
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
             Console.WriteLine(env.WebRootPath);
         }
+    }
+
+    public static class set
+    {
+        public static string www;
     }
 }
