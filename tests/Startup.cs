@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using tests.Areas.Identity;
 using tests.Data;
 using BlazorStyled;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace tests
 {
@@ -47,6 +48,12 @@ namespace tests
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
