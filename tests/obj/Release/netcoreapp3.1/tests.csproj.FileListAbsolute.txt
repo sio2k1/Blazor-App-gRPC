@@ -104,3 +104,4 @@ E:\@SkyDrive\SkyDrive\@backup\@nmit\WEB701\WEB701PRJ\tests\obj\Release\netcoreap
 E:\@SkyDrive\SkyDrive\@backup\@nmit\WEB701\WEB701PRJ\tests\obj\Release\netcoreapp3.1\tests.dll
 E:\@SkyDrive\SkyDrive\@backup\@nmit\WEB701\WEB701PRJ\tests\obj\Release\netcoreapp3.1\tests.pdb
 E:\@SkyDrive\SkyDrive\@backup\@nmit\WEB701\WEB701PRJ\tests\obj\Release\netcoreapp3.1\tests.genruntimeconfig.cache
+E:\@SkyDrive\SkyDrive\@backup\@nmit\WEB701\WEB701PRJ\tests\obj\Release\netcoreapp3.1\tests.csprojAssemblyReference.cache
