@@ -17,6 +17,7 @@ using tests.Areas.Identity;
 using tests.Data;
 using BlazorStyled;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Http;
 
 namespace tests
 {
@@ -49,6 +50,13 @@ namespace tests
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+            app.Use((context, next) =>
+            {
+                context.Request.PathBase = new PathString("/web701_so/net");
+                return next.Invoke();
+            });
+            //app.UsePathBase("/web701_so/net");
+
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
@@ -65,12 +73,15 @@ namespace tests
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UsePathBase("/web701_so/net");
+
+
+
+            //app.UsePathBase("/web701_so/net");
 
 
 
             //app.UseHttpsRedirection();
-            app.UseStaticFiles("/web701_so/net");
+            app.UseStaticFiles();
 
             app.UseRouting();
 
