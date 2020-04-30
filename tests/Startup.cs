@@ -56,7 +56,7 @@ namespace tests
                 //context.Request.PathBase = new PathString("/web701_so/net");
                 return next.Invoke();
             });
-            Console.WriteLine(env.WebRootPath);
+            
             //app.UsePathBase("/web701_so/net");
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
@@ -96,6 +96,7 @@ namespace tests
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+            Console.WriteLine(env.WebRootPath);
         }
     }
 }
