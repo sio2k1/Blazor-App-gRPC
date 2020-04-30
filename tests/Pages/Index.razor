@@ -1,0 +1,16 @@
+﻿@page "/"
+
+<Styled @bind-Classname="@indexPage">
+    background-color: red;
+</Styled>
+
+<div class="@indexPage">
+    <h1>Hello, world!</h1>
+</div>
+
+<MatButton Icon="favorite" Label="Simple Button"></MatButton>
+Welcome to your new app.
+
+@code {
+    private string indexPage;
+}
