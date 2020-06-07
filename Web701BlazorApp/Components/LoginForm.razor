@@ -1,0 +1,100 @@
+﻿@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@using WEB701BalzorApp.Auth
+@using System.Web
+@using SQLReflectionMapper
+
+
+
+    <div class="w-full max-w-xs">
+        <EditForm  Model="@user" OnValidSubmit="ValidateUser" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                    Username
+                </label>
+                <InputText @bind-Value="user.uLogin" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"></InputText>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Password
+                </label>
+                @if (incorrectPWD)
+                {
+                    <InputText @bind-Value="user.uPassword" class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"></InputText>
+                    <p class="text-red-500 text-xs italic">Incorrect password.</p>
+                }
+                else
+                {
+                    <InputText @bind-Value="user.uPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"></InputText>
+                }
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Sign In
+                </button>
+                <a class="inline-block align-baseline font-bold text-sm text-gray-800 hover:text-gray-600" href="#">
+                    Forgot Password?
+                </a>
+            </div>
+        </EditForm>
+    </div>
+
+
+
+
+@*<EditForm Model="@user" OnValidSubmit="ValidateUser">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <InputText @bind-Value="user.login" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <InputText @bind-Value="user.pwd" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+        <div style="@myStyle">Wrong password</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>*@
+@code {
+    bool incorrectPWD = false;
+
+    private User user = new User();
+    protected override void OnInitialized()
+    {
+        //myStyle = "visibility: hidden;";
+    }
+    private async Task<bool> ValidateUser()
+    {
+
+        ParamList p = new ParamList()
+        {
+            ["login"] = user.uLogin,
+            ["password"] = user.uPassword,
+        };
+
+        List<User> u = new List<User>();
+        try
+        {
+            u = DBExecuter.SQLRequestSPAutoFillParams("sp_VerifyUserByLoginPassword", p).Map<User>();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.GetBaseException().Message);
+        }
+
+        if (u.Count==1)
+        {
+            user = u.First();
+            await ((BasicAuthStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user);
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            incorrectPWD = true;
+            this.StateHasChanged();
+        }
+        return await Task.FromResult(true);
+    }
+
+
+}

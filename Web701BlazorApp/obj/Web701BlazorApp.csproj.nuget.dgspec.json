@@ -1,0 +1,153 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\WEB701\\WEB701PRJ\\Web701BlazorApp\\Web701BlazorApp.csproj": {}
+  },
+  "projects": {
+    "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SQLReflectionMapper\\SQLReflectionMapper.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SQLReflectionMapper\\SQLReflectionMapper.csproj",
+        "projectName": "SQLReflectionMapper",
+        "projectPath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SQLReflectionMapper\\SQLReflectionMapper.csproj",
+        "packagesPath": "C:\\Users\\sio\\.nuget\\packages\\",
+        "outputPath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SQLReflectionMapper\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\WEB701\\WEB701PRJ\\Web701BlazorApp\\Web701BlazorApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\WEB701\\WEB701PRJ\\Web701BlazorApp\\Web701BlazorApp.csproj",
+        "projectName": "Web701BlazorApp",
+        "projectPath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\WEB701\\WEB701PRJ\\Web701BlazorApp\\Web701BlazorApp.csproj",
+        "packagesPath": "C:\\Users\\sio\\.nuget\\packages\\",
+        "outputPath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\WEB701\\WEB701PRJ\\Web701BlazorApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SQLReflectionMapper\\SQLReflectionMapper.csproj": {
+                "projectPath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SQLReflectionMapper\\SQLReflectionMapper.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "BlazorStyled": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[2.1.6, )"
+            },
+            "BuildWebCompiler": {
+              "target": "Package",
+              "version": "[1.12.394, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

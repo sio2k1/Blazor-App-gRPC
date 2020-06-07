@@ -1,0 +1,89 @@
+﻿@using Web701BlazorApp.Data
+@using Web701BlazorApp.State
+@using SQLReflectionMapper
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject StateControl StateControl
+
+
+<div class="hidden sm:inline md:inline lg:inline xl:inline">
+    <table class="table-auto w-full max-w-4xl">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Item Name</th>
+                <th class="px-4 py-2">Category</th>
+                <th class="px-4 py-2">Size</th>
+                <th class="px-4 py-2">Buy Out Price</th>
+                <th class="px-4 py-2">Current Bid</th>
+                <th class="px-4 py-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in items)
+            {
+                <AucBidLine item="r"></AucBidLine>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="inline sm:hidden md:hidden lg:hidden xl:hidden flex flex-col">
+
+    @*@foreach (var r in items)
+    {
+
+        <div class="max-w-sm rounded overflow-hidden shadow-md mt-3">
+            <div class="px-6 py-4">
+                <div class="font-bold text-md mb-2">@r.Name</div>
+                <div class="grid grid-cols-2">
+                    <div class="text-gray-700 text-base">Category:</div>
+                    <div class="text-gray-700 text-base">@r.Category</div>
+
+                    <div class="text-gray-700 text-base">Size:</div>
+                    <div class="text-gray-700 text-base">@r.Size</div>
+
+                    <div class="text-gray-700 text-base">B\O Price:</div>
+                    <div class="text-gray-700 text-base">@r.BuyOutPrice</div>
+
+                    <div class="text-gray-700 text-base">Current bid:</div>
+                    <div class="text-gray-700 text-base">@r.CurrentBid</div>
+
+                    <div class="text-gray-700 text-base">Client bid:</div>
+                    <div class="text-gray-700 text-base">@r.uName</div>
+                </div>
+            </div>
+        </div>
+
+    }*@
+</div>
+
+@code {
+    private List<Item> items = new List<Item>();
+    private event Action Unsubscribe;
+    public void Reload()
+    {
+        try
+        {
+            items = DBExecuter.SQLRequestSPAutoFillParams("sp_GetItemsByUserId", new ParamList { ["id"] = -1 }).Map<Item>();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.GetBaseException().Message);
+        }
+        this.StateHasChanged();
+    }
+    protected override void OnInitialized()
+    {
+        //Unsubscribe = async () => await Reload();
+        //StateControl.OrderPlacement.OnChange += Unsubscribe;
+        Reload();
+
+
+    }
+
+    public void Dispose()
+    {
+        //StateControl.OrderPlacement.OnChange -= Unsubscribe;
+    }
+
+}
+
+

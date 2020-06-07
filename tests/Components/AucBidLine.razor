@@ -1,0 +1,34 @@
+﻿@using WEB701BalzorApp.infastructure
+@using SQLReflectionMapper
+<div class="itemline">
+    <span>
+        @Item.name | Cat:@Item.category | Size:@Item.size | Current bid: @Item.currentBid
+        <input @bind="@currbid"
+               type="number" step="10"
+               name="itembuyout"
+               placeholder="Item buyout price" min="@Item.currentBid" />
+        <button @onclick="@Bid">bid</button>
+    </span>
+</div>
+
+@code {
+    [Parameter]
+    public AucRecord Item { get; set; }
+    [Parameter]
+    public string userName { get; set; }
+    [Parameter]
+    public EventCallback<AucRecord> RefreshDB { get; set; }
+
+    private float currbid;
+    protected override void OnInitialized()
+    {
+        currbid = Item.currentBid;
+    }
+
+    private void Bid()
+    {
+        Item.currentBid = currbid;
+        DBExecuter.execNonQuery("update items set currentbid=" + currbid + ", userBid='"+userName+"' where id=" + Item.id, new ParamList());
+        RefreshDB.InvokeAsync(Item);
+    }
+}

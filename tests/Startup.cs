@@ -13,14 +13,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using tests.Areas.Identity;
-using tests.Data;
 using BlazorStyled;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Http;
+using Blazored.LocalStorage;
+using WEB701BalzorApp.infastructure;
+using System.Data.Common;
+using SQLReflectionMapper;
+using System.Data.SqlClient;
 
-namespace tests
+namespace WEB701BalzorApp
 {
+
+    public static class SettingsManager
+    {
+        public static IConfiguration config = new ConfigurationBuilder()
+          .AddJsonFile("appsettings.json", true, true)
+          .Build();
+    }
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -34,16 +44,11 @@ namespace tests
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
-            services.AddServerSideBlazor();
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddServerSideBlazor();            
             services.AddBlazorStyled();
+            services.AddBlazoredLocalStorage();
+            services.AddScoped<AuthenticationStateProvider, BasicAuthStateProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +56,7 @@ namespace tests
         {
 
             set.www = env.WebRootPath;
-            Console.WriteLine(env.WebRootPath);
+
             app.Use((context, next) =>
             {
                 //context.Request.PathBase = new PathString("/web701_so/net");
@@ -78,8 +83,9 @@ namespace tests
             }
 
 
-
-            //app.UsePathBase("/web701_so/net");
+            DbProviderFactories.RegisterFactory("System.Data.SqlClient", SqlClientFactory.Instance);
+            ConnectionSettings.data = SettingsManager.config.GetSection("ConnectionSettings").Get<CSData>();
+            ConnectionSettings.data.InitProvider();
 
 
 

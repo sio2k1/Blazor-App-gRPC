@@ -1,0 +1,23 @@
+﻿@using Web701BlazorApp.Data
+
+    <tr>
+        <td class="border px-4 py-2">@item.Name</td>
+        <td class="border px-4 py-2">@item.Category</td>
+        <td class="border px-4 py-2">@item.Size</td>
+        <td class="border px-4 py-2">@item.BuyOutPrice$</td>
+        <td class="border px-4 py-2">@item.CurrentBid$</td>
+        <td class="border px-4 py-2 grid grid-rows-2">
+            <button class="bg-gray-800 hover:bg-gray-600 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline m-1">
+                Bid @((item.CurrentBid + 5) > item.BuyOutPrice ? item.BuyOutPrice : (item.CurrentBid + 5))$
+            </button>
+            <button class="bg-gray-800 hover:bg-gray-600 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline m-1">
+                Buy Out @item.BuyOutPrice$
+            </button>
+        </td>
+    </tr>
+
+@code {
+    [Parameter]
+    public Web701BlazorApp.Data.Item item { get; set; }
+
+}

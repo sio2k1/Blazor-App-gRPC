@@ -1,0 +1,27 @@
+﻿@page "/"
+    <Web701BlazorApp.Components.ContentAndFooter IsIndex="true"></Web701BlazorApp.Components.ContentAndFooter>
+        @*<Web701BlazorApp.Components.ContentAndFooter IsIndex="true">
+            <p>
+                To call into JavaScript from .NET, use the IJSRuntime abstraction. To issue JS interop calls, inject the IJSRuntime
+                abstraction in your
+                component. The InvokeAsync
+                    method takes an identifier for the JavaScript function that you wish to invoke along with
+                    any number of
+                    JSON-serializable arguments. The function identifier is relative to the global scope (window). If you wish to call
+                    window.someScope.someFunction, the identifier is someScope.someFunction. There's no need to register the function
+                    before it's called. The
+                    return type T must also be JSON serializable. T should match the .NET type that best maps to the JSON type returned.
+                    <br>
+                    For Blazor Server apps with prerendering enabled, calling into JavaScript isn't possible during the initial
+                    prerendering. JavaScript interop calls
+                    must be deferred until after the connection with the browser is established. For more information, see the Detect when
+                    a Blazor Server app is
+                    prerendering section.
+                    <br>
+                    The following example is based on TextDecoder, a JavaScript-based decoder. The example demonstrates how to invoke a
+                    JavaScript function
+                    from a C# method. The JavaScript function accepts a byte array from a C# method, decodes the array, and returns the
+                    text to the component
+                    for display.
+            </p>
+        </Web701BlazorApp.Components.ContentAndFooter>*@

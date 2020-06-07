@@ -1,0 +1,33 @@
+﻿<style>
+    .layoutcontainer {
+        display: flex;
+        flex-direction: column;
+        min-height:100vh;
+    }
+
+    .content {
+        flex: 1 0 auto;
+    }
+
+    .footer {
+        flex-shrink: 0;
+    }
+</style>
+
+<div class="layoutcontainer">
+    <div class="content"><CommonContent IsIndex="@IsIndex" CentredContent="@CentredContent">@ChildContent</CommonContent></div>
+    <div class="footer">
+        <VariableFooter IsIndex="@IsIndex"></VariableFooter>
+    </div>
+
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public bool IsIndex { get; set; } = false;
+    [Parameter]
+    public bool CentredContent { get; set; } = false;
+
+}

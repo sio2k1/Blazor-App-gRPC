@@ -1,0 +1,15 @@
+﻿@page "/bid"
+
+
+<Web701BlazorApp.Components.ContentAndFooter>
+    <AuthorizeView Roles="sa, client">
+        <Authorized>
+            <Web701BlazorApp.Components.AucBidList></Web701BlazorApp.Components.AucBidList>
+        </Authorized>
+        <NotAuthorized>
+            <NavLink href="/login">
+                Please sign in to view this content.
+            </NavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</Web701BlazorApp.Components.ContentAndFooter>

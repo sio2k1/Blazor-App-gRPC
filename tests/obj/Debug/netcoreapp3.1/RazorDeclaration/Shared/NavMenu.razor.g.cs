@@ -5,7 +5,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace tests.Shared
+namespace WEB701BlazorApp.Shared
 {
     #line hidden
     using System;
@@ -71,14 +71,14 @@ using MatBlazor;
 #nullable disable
 #nullable restore
 #line 9 "E:\@SkyDrive\SkyDrive\@backup\@nmit\WEB701\WEB701PRJ\tests\_Imports.razor"
-using tests;
+using WEB701BalzorApp;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 10 "E:\@SkyDrive\SkyDrive\@backup\@nmit\WEB701\WEB701PRJ\tests\_Imports.razor"
-using tests.Shared;
+using WEB701BalzorApp.Shared;
 
 #line default
 #line hidden

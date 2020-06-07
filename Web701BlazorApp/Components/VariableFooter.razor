@@ -1,0 +1,43 @@
+﻿@if (IsIndex)
+{
+    <SFooter FillColor="rgba(5, 33, 44, 0.86);" />
+}
+else
+{
+    <style>
+        .variable-footer-img {
+            background-image: url('img/basket_small.png'), url('img/bg1920_nopeach.jpg');
+            background-position: bottom -130px right 70px, top 75px left 0px;
+            background-repeat: no-repeat, no-repeat;
+            background-size: 500px, auto;
+        }
+
+        .variable-footer-grid{
+            display:grid;
+            grid-template-rows:75px 40px;
+        }
+        @@media (max-aspect-ratio: 3/2) {
+            .variable-footer-grid {
+                grid-template-rows: 1px 40px;
+            }
+            .variable-footer-img {
+                background-image: url('img/bg1920_nopeach.jpg');
+                background-position: top 0px left 0px;
+                background-repeat: no-repeat;
+                background-size: auto;
+            }
+        }
+    </style>
+        
+    <div class="variable-footer-grid variable-footer-img">
+        <div></div>
+        <div><SFooter /></div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public bool IsIndex { get; set; }
+    private string FooterBasket;
+}

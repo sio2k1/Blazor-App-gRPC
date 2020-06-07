@@ -1,0 +1,119 @@
+﻿<style>
+    .common-content {
+        display: grid;
+
+    }
+
+    .article-content {
+        grid-column: 1;
+        margin: 10px 10px 10px 70px;
+    }
+    .common-content-basket {
+        grid-column: 2;
+        height: 100%;
+        background-image: url('img/basket2.png');
+        margin-right: 2vw;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center right;
+    }
+</style >
+@if (IsIndex)
+{
+    <style>
+        body {
+            background-image: url('img/lf2_small.png'), url('img/bg1920_nopeach.jpg');
+            background-position: top 60vh left -140px, top 0px right 0px;
+            background-repeat: no-repeat, no-repeat;
+            background-size: 200px, auto;
+        }
+        .common-content {
+            grid-template-columns: auto 30vw;
+            min-height: 90vh;
+        }
+
+
+        @@media (max-aspect-ratio: 3/2) {
+            .common-content-basket {
+                display: block !important;
+                background-size: auto 100%;
+                margin-right: 0px;
+                background-position: 0px 0px;
+            }
+
+            .common-content {
+                grid-template-columns: auto 14vw;
+            }
+        }
+    </style>
+     <div class="common-content">
+         <div class="article-content">
+             @*<Menu Color="text-orange-200" ColorHover="text-orange-700" ColorButtonBorder="border-orange-200"></Menu>*@
+             <Menu Color="text-gray-100" ColorHover="text-gray-600" ColorButtonBorder="border-white"></Menu>
+             <IndexLogo />
+         </div>
+         <div class="common-content-basket"></div>
+     </div>
+}
+else
+{
+    <style>
+        .common-content-basket {
+            display: none;
+        }
+        body {
+            background-image: url('img/lf2_small_fliped.png');
+            background-position: top 15vh left -140px;
+            background-repeat: no-repeat;
+            background-size: 200px;
+        }
+        .common-content {
+            grid-template-columns: auto 15vw;
+        }
+        .common-content-centred {
+            min-height: 50vh;
+        }
+        @@media (max-aspect-ratio: 3/2) {
+            .common-content-basket {
+                display: block !important;
+                background-size: auto 95%;
+                margin-right: 0px;
+                background-position: 0px 0px;
+            }
+
+            .common-content {
+                grid-template-columns: auto 14vw;
+                min-height: 94vh;
+            }
+            .common-content-centred {
+                min-height: 1vh;
+            }
+        }
+    </style>
+
+    <div class="common-content">
+        <div class="article-content">
+            <div class="flex flex-col">
+                <div><Menu Color="text-gray-800" ColorHover="text-gray-600" ColorButtonBorder="border-gray-600"></Menu></div>
+                @if (CentredContent)
+                {
+                    <div class="flex items-center justify-center common-content-centred md:mt-16 mt-4">@ChildContent</div>
+                }
+                else
+                {
+                <div class="lg:m-16 xl:m-16 md:m-10 sm:m-1 ">@ChildContent</div>
+                }
+            </div>
+        </div>
+        <div class="common-content-basket"></div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public bool IsIndex { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public bool CentredContent { get; set; } = false;
+}

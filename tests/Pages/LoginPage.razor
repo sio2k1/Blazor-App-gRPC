@@ -1,0 +1,42 @@
+﻿@page "/loginpage"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@using WEB701BalzorApp.infastructure
+@using System.Web
+<h3>LoginPage</h3>
+<EditForm Model="@user" OnValidSubmit="ValidateUser">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <InputText @bind-Value="user.login" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <InputText @bind-Value="user.pwd" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+        <div style="@myStyle">Wrong password</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+@code {
+    string myStyle;
+
+    private User user = new User();
+    protected override void OnInitialized()
+    {
+        myStyle = "visibility: hidden;";
+    }
+    private async Task<bool> ValidateUser()
+    {
+        //call db or API to validate user here
+        if ((user.login=="test") && (user.pwd=="111")) //fake user falidation
+        {
+            user.role = "sa";
+            await ((BasicAuthStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user);
+            NavigationManager.NavigateTo("/");
+        } else
+        {
+            myStyle = "color: red;";
+        }
+        return await Task.FromResult(true);
+    }
+}

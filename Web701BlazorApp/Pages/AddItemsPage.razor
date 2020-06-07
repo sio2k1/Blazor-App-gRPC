@@ -1,0 +1,20 @@
+﻿@page "/add"
+
+
+<Web701BlazorApp.Components.ContentAndFooter>
+    <AuthorizeView Roles="sa, member">
+        <Authorized>
+            <Web701BlazorApp.Components.AddItemsList></Web701BlazorApp.Components.AddItemsList>
+            <Web701BlazorApp.Components.AddItemsForm></Web701BlazorApp.Components.AddItemsForm>
+
+        </Authorized>
+        <NotAuthorized>
+            <NavLink href="/login">
+                Please sign in to view this content.
+            </NavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</Web701BlazorApp.Components.ContentAndFooter>
+
+
+
