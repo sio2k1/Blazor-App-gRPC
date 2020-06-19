@@ -1,0 +1,28 @@
+﻿@*Page to display articles, obtained from gRPC back-end*@
+@using Web701BlazorApp.Data
+@using WEB701GRPC.Protos
+@page "/articles"
+<Web701BlazorApp.Components.ContentAndFooter>
+    <div class="font-bold text-xl mb-8">Articles</div>
+    <Web701BlazorApp.Components.CardList PageHandler="article" Lst="@lst"></Web701BlazorApp.Components.CardList>
+</Web701BlazorApp.Components.ContentAndFooter>
+
+@code {
+    List<Card> lst = new List<Card>();
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            lst.Clear();
+            List<Article> articles = await gRPCClient.GetArticleList();
+            articles.ForEach(a => lst.Add(new Card { Text = a.Text, Id = a.Id, ImageLink = a.ImageLink, Title = a.Title })); //convert article to card, to use it with card component
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.GetBaseException().Message);
+        }
+        this.StateHasChanged();
+    }
+
+
+}

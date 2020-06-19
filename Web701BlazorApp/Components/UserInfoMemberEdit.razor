@@ -1,0 +1,69 @@
+﻿@*Form to edit user details*@
+@using Web701BlazorApp.Data
+@using Web701BlazorApp.Auth
+@using SQLReflectionMapper
+@using Web701BlazorApp.State
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject StateControl StateControl
+
+<EditForm Model="@user" OnValidSubmit="OnSubmit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-4xl">
+    <DataAnnotationsValidator />
+
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">User Name</label>
+        <InputText @bind-Value="user.uName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="User name" id="username" />
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="desc">Description</label>
+        <InputTextArea  @bind-Value="user.uDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Description" id="desc" />
+    </div>
+
+    <div class="flex items-center justify-between">
+        <button class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Save
+        </button>
+    </div>
+    <div class="mt-4 text-red-700">
+        <ValidationSummary />
+    </div>
+</EditForm>
+
+@code {
+
+    int uid = -1;
+    protected override async void OnInitialized() //get user data
+    {
+        uid = await Common.GetCurrentUserId(AuthenticationStateProvider);
+        List<GrowerDetails> u = new List<GrowerDetails>();
+        try
+        {
+            u = DBExecuter.SQLRequestSPAutoFillParams("sp_GetUserDetails", new ParamList { ["id"] = uid }).Map<GrowerDetails>();
+            user = u.First();
+            this.StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.GetBaseException().Message);
+        }
+    }
+
+    GrowerDetails user = new GrowerDetails();
+
+    private void OnSubmit() //set user data
+    {
+        if (uid != -1)
+        {
+            try
+            {
+                DBExecuter.execNonQuerySPAutoFillParams("sp_SetUserDetails", new ParamList { ["id"] = uid, ["uName"] = user.uName, ["uDesc"] = user.uDescription });
+                (AuthenticationStateProvider as WEB701BalzorApp.Auth.BasicAuthStateProvider).UpdateName(user.uName);
+                StateControl.UserNameChange.Changed();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.GetBaseException().Message);
+            }
+        }
+    }
+
+}

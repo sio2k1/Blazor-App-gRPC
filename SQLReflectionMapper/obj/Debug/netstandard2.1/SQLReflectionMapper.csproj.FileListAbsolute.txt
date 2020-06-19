@@ -1,0 +1,9 @@
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\bin\Debug\netstandard2.1\SQLReflectionMapper.deps.json
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\bin\Debug\netstandard2.1\SQLReflectionMapper.dll
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\obj\Debug\netstandard2.1\SQLReflectionMapper.AssemblyInfoInputs.cache
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\obj\Debug\netstandard2.1\SQLReflectionMapper.AssemblyInfo.cs
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\bin\Debug\netstandard2.1\SQLReflectionMapper.pdb
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\obj\Debug\netstandard2.1\SQLReflectionMapper.csproj.CoreCompileInputs.cache
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\obj\Debug\netstandard2.1\SQLReflectionMapper.dll
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\obj\Debug\netstandard2.1\SQLReflectionMapper.pdb
+E:\@SkyDrive\SkyDrive\@backup\@nmit\@PRJ\@DEV\netCore\backend\SQLReflectionMapper\obj\Debug\netstandard2.1\SQLReflectionMapper.csprojAssemblyReference.cache

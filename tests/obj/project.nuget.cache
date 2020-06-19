@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fpCORWS77RF4ZQ4JgcLqTTP5Kn5fAbgOCKCTVl9Kf2tnBF+WGTHU0+EWfJ198qw5zzgS+Nyr7IvAHazPFFWfnQ==",
+  "dgSpecHash": "B8ZTzOFjG4GhuUXKMk6Iz1r7vN/+7YXxiPtDRA3az26xLyKlbljiM50DENKT4J5S1ORQAUa7xKLgCvGpF3bwYQ==",
   "success": true,
   "projectFilePath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\WEB701\\WEB701PRJ\\tests\\tests.csproj",
   "expectedPackageFiles": [
@@ -178,8 +178,7 @@
     "C:\\Users\\sio\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\sio\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\sio\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\sio\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\sio\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\sio\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

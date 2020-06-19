@@ -1,0 +1,34 @@
+﻿@*Display info about one grower*@
+@using Web701BlazorApp.Data
+@using SQLReflectionMapper
+@page "/grower/{id}"
+<Web701BlazorApp.Components.ContentAndFooter>
+    <div>
+        <h2 class="text-xl">@GrowerItem.Title</h2>
+        <br />
+        <img class="" src="@GrowerItem.ImageLink">
+        <br />
+        <p>@GrowerItem.Text</p>
+    </div>
+</Web701BlazorApp.Components.ContentAndFooter>
+
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    private Card GrowerItem { get; set; } = new Card();
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            GrowerItem = DBExecuter.SQLRequestSPAutoFillParams("sp_GetGrowerList", new ParamList { ["id"] = int.Parse(id) }).Map<Card>().First();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.GetBaseException().Message);
+        }
+        this.StateHasChanged();
+    }
+
+}

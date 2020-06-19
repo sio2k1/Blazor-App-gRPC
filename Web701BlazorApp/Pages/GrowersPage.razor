@@ -1,0 +1,26 @@
+﻿@*Display growers as cards*@
+@using Web701BlazorApp.Data
+@using SQLReflectionMapper
+@page "/growers"
+    <Web701BlazorApp.Components.ContentAndFooter>
+        <div class="font-bold text-xl mb-8">Growers</div>
+        <Web701BlazorApp.Components.CardList PageHandler="grower" Lst="@lst"></Web701BlazorApp.Components.CardList>
+    </Web701BlazorApp.Components.ContentAndFooter>
+
+@code {
+    List<Card> lst = new List<Card>();
+    protected override void OnInitialized()
+    {
+        try
+        {
+            lst = DBExecuter.SQLRequestSPAutoFillParams("sp_GetGrowerList", new ParamList { ["id"] = -1 }).Map<Card>();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.GetBaseException().Message);
+        }
+        this.StateHasChanged();
+    }
+
+
+}

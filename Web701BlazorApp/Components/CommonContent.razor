@@ -1,13 +1,14 @@
-﻿<style>
+﻿@*Represent common content page, containing menu, content and footer. Component is different for index and common page*@
+<style>
     .common-content {
         display: grid;
-
     }
 
     .article-content {
         grid-column: 1;
         margin: 10px 10px 10px 70px;
     }
+
     .common-content-basket {
         grid-column: 2;
         height: 100%;
@@ -17,7 +18,7 @@
         background-size: contain;
         background-position: center right;
     }
-</style >
+</style>
 @if (IsIndex)
 {
     <style>
@@ -26,7 +27,23 @@
             background-position: top 60vh left -140px, top 0px right 0px;
             background-repeat: no-repeat, no-repeat;
             background-size: 200px, auto;
+            animation: leave-appear 1.4s;
         }
+
+        @@keyframes leave-appear {
+            0% {
+                background-position: top 30vh left -215px, top 0px right 0px;
+            }
+
+            50% {
+                background-position: top 30vh left -140px, top 0px right 0px;
+            }
+
+            100% {
+                background-position: top 60vh left -140px, top 0px right 0px;
+            }
+        }
+
         .common-content {
             grid-template-columns: auto 30vw;
             min-height: 90vh;
@@ -46,14 +63,14 @@
             }
         }
     </style>
-     <div class="common-content">
-         <div class="article-content">
-             @*<Menu Color="text-orange-200" ColorHover="text-orange-700" ColorButtonBorder="border-orange-200"></Menu>*@
-             <Menu Color="text-gray-100" ColorHover="text-gray-600" ColorButtonBorder="border-white"></Menu>
-             <IndexLogo />
-         </div>
-         <div class="common-content-basket"></div>
-     </div>
+    <div class="common-content">
+        <div class="article-content">
+            @*<Menu Color="text-orange-200" ColorHover="text-orange-700" ColorButtonBorder="border-orange-200"></Menu>*@
+            <Menu Color="text-gray-100" ColorHover="text-gray-600" ColorButtonBorder="border-white"></Menu>
+            <IndexLogo />
+        </div>
+        <div class="common-content-basket"></div>
+    </div>
 }
 else
 {
@@ -61,18 +78,33 @@ else
         .common-content-basket {
             display: none;
         }
+
         body {
             background-image: url('img/lf2_small_fliped.png');
             background-position: top 15vh left -140px;
             background-repeat: no-repeat;
             background-size: 200px;
+            animation: leave-appear-c 1.4s;
         }
+
         .common-content {
             grid-template-columns: auto 15vw;
         }
+
         .common-content-centred {
             min-height: 50vh;
         }
+
+        @@keyframes leave-appear-c {
+            0% {
+                background-position: top 15vh left -215px;
+            }
+
+            100% {
+                background-position: top 15vh left -140px;
+            }
+        }
+
         @@media (max-aspect-ratio: 3/2) {
             .common-content-basket {
                 display: block !important;
@@ -85,6 +117,7 @@ else
                 grid-template-columns: auto 14vw;
                 min-height: 94vh;
             }
+
             .common-content-centred {
                 min-height: 1vh;
             }
@@ -101,7 +134,7 @@ else
                 }
                 else
                 {
-                <div class="lg:m-16 xl:m-16 md:m-10 sm:m-1 ">@ChildContent</div>
+                    <div class="lg:m-16 xl:m-16 md:m-10 sm:m-1 ">@ChildContent</div>
                 }
             </div>
         </div>
@@ -116,4 +149,6 @@ else
     public RenderFragment ChildContent { get; set; }
     [Parameter]
     public bool CentredContent { get; set; } = false;
+
+
 }

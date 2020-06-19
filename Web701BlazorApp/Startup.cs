@@ -46,18 +46,16 @@ namespace Web701BlazorApp
             services.AddBlazoredLocalStorage();
             services.AddScoped<AuthenticationStateProvider, BasicAuthStateProvider>();
             services.AddScoped<StateControl>();
-           
+            services.AddHttpContextAccessor();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            //set.www = env.WebRootPath;
-
             app.Use((context, next) =>
             {
-                //context.Request.PathBase = new PathString("/web701_so/net");
                 return next.Invoke();
             });
 
@@ -97,10 +95,6 @@ namespace Web701BlazorApp
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapGet("/a", async context =>
-                //{
-                //    await context.Response.WriteAsync(set.www);
-                //});
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");

@@ -1,23 +1,90 @@
-﻿@using Web701BlazorApp.Data
+﻿@*Display table row with item for bit for big screens*@
+@using Web701BlazorApp.Data
+@using SQLReflectionMapper
+@using System.Globalization
+@using System.Threading
 
-    <tr>
+@{Thread.CurrentThread.CurrentCulture = new CultureInfo("en-NZ");}
+
+    <tr class="@visibility">
         <td class="border px-4 py-2">@item.Name</td>
+        <td class="border px-4 py-2">
+            <NavLink href="@($"grower/{item.MemberUserRecordID}")">
+                <div class="text-sm block text-gray-800 hover:text-gray-600 underline">@item.SupplierName</div>  
+            </NavLink>
+        </td>
         <td class="border px-4 py-2">@item.Category</td>
         <td class="border px-4 py-2">@item.Size</td>
-        <td class="border px-4 py-2">@item.BuyOutPrice$</td>
-        <td class="border px-4 py-2">@item.CurrentBid$</td>
+        <td class="border px-4 py-2">@item.BuyOutPrice.ToString("C")</td>
+        <td class="border px-4 py-2">@item.CurrentBid.ToString("C")</td>
         <td class="border px-4 py-2 grid grid-rows-2">
-            <button class="bg-gray-800 hover:bg-gray-600 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline m-1">
-                Bid @((item.CurrentBid + 5) > item.BuyOutPrice ? item.BuyOutPrice : (item.CurrentBid + 5))$
+            <button class="bg-gray-800 hover:bg-gray-600 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline m-1" @onclick="@(e => PlaceBid(@getBidValue()))">
+                Bid @getBidValue().ToString("C")
             </button>
-            <button class="bg-gray-800 hover:bg-gray-600 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline m-1">
-                Buy Out @item.BuyOutPrice$
+            <button class="bg-gray-800 hover:bg-gray-600 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline m-1" @onclick="@(e => PlaceBid(item.BuyOutPrice))">
+                Buy Out @item.BuyOutPrice.ToString("C")
             </button>
         </td>
+
     </tr>
+<tr class="@confVisibility">
+    <td colspan="7" class="border px-4 py-2 ">
+        <ConfirmationMsg Title="Confirmation">Bid placed. Item name: <b>@item.Name</b><br />Bid: <b>$@lastBid</b></ConfirmationMsg>
+    </td>
+</tr>
+
+
 
 @code {
     [Parameter]
-    public Web701BlazorApp.Data.Item item { get; set; }
+    public Item item { get; set; }
+    [Parameter]
+    public int CurrentUserId { get; set; }
+
+    private string visibility = "";
+    private string confVisibility = "hidden";
+    private float lastBid = 0;
+    private float getBidValue() // generate next bid ammount
+    {
+        return (item.CurrentBid + 5) > item.BuyOutPrice ? item.BuyOutPrice : (item.CurrentBid + 5); 
+    }
+
+
+
+    async Task HideMsg() // use this to hide confirmation msg
+    {
+        await Task.Delay(8000);
+        confVisibility = "hidden";
+        this.StateHasChanged();
+    }
+
+    public async void PlaceBid(float bid)
+    {
+        lastBid = bid;
+        //sp_BidOnItem @itemsID int, @clientID int, @bid float
+        ParamList p = new ParamList
+        {
+            ["itemsID"] = item.Id,
+            ["clientID"] = CurrentUserId,
+            ["bid"] = bid
+        };
+        try
+        {
+            DBExecuter.execNonQuerySPAutoFillParams("sp_BidOnItem", p); // request db to place a bid
+            item.CurrentBid = bid;
+            item.ClientUserRecordID = CurrentUserId;
+            if (item.CurrentBid == item.BuyOutPrice)
+            {
+                visibility = "hidden";
+            }
+            confVisibility = ""; // show confirmation msg
+            await HideMsg();
+            this.StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.GetBaseException().Message);
+        }
+    }
 
 }

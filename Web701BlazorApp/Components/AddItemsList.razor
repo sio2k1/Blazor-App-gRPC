@@ -1,9 +1,14 @@
-﻿@using Web701BlazorApp.Data
+﻿@*List of items for particular grower*@
+@using Web701BlazorApp.Data
 @using Web701BlazorApp.State
 @using SQLReflectionMapper
+@using System.Globalization
+@using System.Threading
+
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject StateControl StateControl
 
+@{Thread.CurrentThread.CurrentCulture = new CultureInfo("en-NZ");}
 
 <div class="hidden sm:inline md:inline lg:inline xl:inline">
     <table class="table-auto w-full max-w-4xl">
@@ -15,6 +20,7 @@
                 <th class="px-4 py-2">Buy Out Price</th>
                 <th class="px-4 py-2">Current Bid</th>
                 <th class="px-4 py-2">Last bid User Name</th>
+                <th class="px-4 py-2"></th>
             </tr>
         </thead>
         <tbody>
@@ -24,9 +30,14 @@
                     <td class="border px-4 py-2">@r.Name</td>
                     <td class="border px-4 py-2">@r.Category</td>
                     <td class="border px-4 py-2">@r.Size</td>
-                    <td class="border px-4 py-2">@r.BuyOutPrice</td>
-                    <td class="border px-4 py-2">@r.CurrentBid</td>
-                    <td class="border px-4 py-2">@r.uName</td>
+                    <td class="border px-4 py-2">@r.BuyOutPrice.ToString("C")</td>
+                    <td class="border px-4 py-2">@r.CurrentBid.ToString("C")</td>
+                    <td class="border px-4 py-2">@r.ClientName</td>
+                    <td class="border px-4 py-2">
+                        <button class="bg-gray-800 hover:bg-gray-600 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline m-1" @onclick="@(e => Delete(r.Id))">
+                            Delete
+                        </button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -34,32 +45,35 @@
 </div>
 <div class="inline sm:hidden md:hidden lg:hidden xl:hidden flex flex-col">
 
-            @foreach (var r in items)
-            {
-                
-                <div class="max-w-sm rounded overflow-hidden shadow-md mt-3">
-                    <div class="px-6 py-4">
-                        <div class="font-bold text-md mb-2">@r.Name</div>
-                            <div class="grid grid-cols-2">
-                                <div class="text-gray-700 text-base">Category:</div>
-                                <div class="text-gray-700 text-base">@r.Category</div>
+    @foreach (var r in items)
+    {
 
-                                <div class="text-gray-700 text-base">Size:</div>
-                                <div class="text-gray-700 text-base">@r.Size</div>
+        <div class="max-w-sm rounded overflow-hidden shadow-md mt-3">
+            <div class="px-6 py-4">
+                <div class="font-bold text-md mb-2">@r.Name</div>
+                <div class="grid grid-cols-2">
+                    <div class="text-gray-700 text-base">Category:</div>
+                    <div class="text-gray-700 text-base">@r.Category</div>
 
-                                <div class="text-gray-700 text-base">B\O Price:</div>
-                                <div class="text-gray-700 text-base">@r.BuyOutPrice</div>
+                    <div class="text-gray-700 text-base">Size:</div>
+                    <div class="text-gray-700 text-base">@r.Size</div>
 
-                                <div class="text-gray-700 text-base">Current bid:</div>
-                                <div class="text-gray-700 text-base">@r.CurrentBid</div>
+                    <div class="text-gray-700 text-base">B\O Price:</div>
+                    <div class="text-gray-700 text-base">@r.BuyOutPrice.ToString("C")</div>
 
-                                <div class="text-gray-700 text-base">Client bid:</div>
-                                <div class="text-gray-700 text-base">@r.uName</div>
-                            </div>
-                        </div>
+                    <div class="text-gray-700 text-base">Current bid:</div>
+                    <div class="text-gray-700 text-base">@r.CurrentBid.ToString("C")</div>
+
+                    <div class="text-gray-700 text-base">Client bid:</div>
+                    <div class="text-gray-700 text-base">@r.ClientName</div>
                 </div>
-                
-            }
+                <button class="bg-gray-800 hover:bg-gray-600 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline m-1" @onclick="@(e => Delete(r.Id))">
+                    Delete
+                </button>
+            </div>
+        </div>
+
+    }
 </div>
 
 @code {
@@ -72,7 +86,7 @@
         int uid = int.Parse(user.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value);
         try
         {
-            items = DBExecuter.SQLRequestSPAutoFillParams("sp_GetItemsByUserId", new ParamList { ["id"] = uid }).Map<Item>();
+            items = DBExecuter.SQLRequestSPAutoFillParams("sp_GetItemsByUserId", new ParamList { ["id"] = uid }).Map<Item>(); //get items by grower id
         }
         catch (Exception e)
         {
@@ -80,16 +94,29 @@
         }
         this.StateHasChanged();
     }
+
+    private async void Delete(int id)
+    {
+        try
+        {
+            DBExecuter.execNonQuerySPAutoFillParams("sp_DeleteItem", new ParamList { ["id"] = id }); // to delete an item
+            await Reload();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.GetBaseException().Message);
+        }
+    }
     protected override async void OnInitialized()
     {
         Unsubscribe = async () => await Reload();
-        StateControl.OrderPlacement.OnChange += Unsubscribe;
+        StateControl.OrderPlacement.OnChange += Unsubscribe; //using this for state managment, so we can view changes in list upon add/delete an item.
         await Reload();
 
 
     }
 
-    public void Dispose()
+    public void Dispose() //part of state managment
     {
         StateControl.OrderPlacement.OnChange -= Unsubscribe;
     }

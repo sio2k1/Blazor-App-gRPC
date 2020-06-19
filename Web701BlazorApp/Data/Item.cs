@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Web701BlazorApp.Data
 {
-    public class Item
+    public class Item // data class to represent and validate auction item
     {
         public int Id { get; set; }
         [Required]
@@ -21,10 +21,13 @@ namespace Web701BlazorApp.Data
         [Range(1, 15)]
         public int Size { get; set; }
         public int ClientUserRecordID { get; set; }
-        public string uName { get; set; }
+        public string ClientName { get; set; }
+        public string SupplierName { get; set; }
         [Required]
         [Range(1, 10000)]
         public float Quantity { get; set; }
+        public int MemberUserRecordID { get; set; }
+        
     }
 }
 

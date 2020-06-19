@@ -1,0 +1,16 @@
+﻿@*Page for changing user details*@
+@page "/account"
+
+
+<Web701BlazorApp.Components.ContentAndFooter>
+    <AuthorizeView Roles="sa, member, client">
+        <Authorized>
+            <Web701BlazorApp.Components.UserInfoMemberEdit></Web701BlazorApp.Components.UserInfoMemberEdit>
+        </Authorized>
+        <NotAuthorized>
+            <NavLink href="login">
+                Please sign in to view this content.
+            </NavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</Web701BlazorApp.Components.ContentAndFooter>

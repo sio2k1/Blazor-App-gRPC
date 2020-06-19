@@ -1,54 +1,61 @@
-﻿@using Web701BlazorApp.Data
+﻿@*Component for Add Item Form*@
+@using Web701BlazorApp.Data
 @using SQLReflectionMapper
 @using Web701BlazorApp.State
+@using Web701BlazorApp.Auth
+@using System.Globalization
+@using System.Threading
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject StateControl StateControl
-    <EditForm Model="@item" OnValidSubmit="OnSubmit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-4xl">
-        <DataAnnotationsValidator />
-        <div class="grid grid-cols-2 gap-1">
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="itemname">Item Name</label>
-                <InputText @bind-Value="item.Name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Name" id="itemname" />
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="itemsize">Item Size (cm.)</label>
-                <InputNumber @bind-Value="item.Size" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Size" id="itemsize" max="15" />
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="item">Item Quantity</label>
-                <InputNumber @bind-Value="item.Quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Quantity" id="itemqty" />
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="itemcat">Item Category</label>
-                <div class="relative">
-                    <InputSelect @bind-Value="item.Category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="itemcat">
-                        <option value="">Select category ...</option>
-                        <option value="extra">Extra</option>
-                        <option value="1st">I</option>
-                        <option value="2nd">II</option>
-                    </InputSelect>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-                    </div>
+
+
+@{Thread.CurrentThread.CurrentCulture = new CultureInfo("en-NZ");}
+<EditForm Model="@item" OnValidSubmit="OnSubmit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-4xl">
+    <DataAnnotationsValidator />
+    <div class="grid grid-cols-2 gap-1">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="itemname">Item Name</label>
+            <InputText @bind-Value="item.Name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Name" id="itemname" />
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="itemsize">Item Size (cm.)</label>
+            <InputNumber @bind-Value="item.Size" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Size" id="itemsize" max="15" />
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="item">Item Quantity</label>
+            <InputNumber @bind-Value="item.Quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Quantity" id="itemqty" />
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="itemcat">Item Category</label>
+            <div class="relative">
+                <InputSelect @bind-Value="item.Category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="itemcat">
+                    <option value="">Select category ...</option>
+                    <option value="extra">Extra</option>
+                    <option value="1st">I</option>
+                    <option value="2nd">II</option>
+                </InputSelect>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
                 </div>
-
             </div>
-        </div>
-        
-        <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="itemsize">Calculated Buy Out Price</label>
-            <input disabled="true" value="@PriceCalc()" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Size" id="itemsize" />
-        </div>
 
-        <div class="flex items-center justify-between">
-            <button class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                Add Item
-            </button>
         </div>
-        <div class="mt-4 text-red-700">
-            <ValidationSummary />
-        </div>
-    </EditForm>
+    </div>
+
+    <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="itemsize">Calculated Buy Out Price</label>
+        <input disabled="true" value="@PriceCalc()" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Size" id="itemsize" />
+    </div>
+
+    <div class="flex items-center justify-between">
+        <button class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Add Item
+        </button>
+    </div>
+    <div class="mt-4 text-red-700">
+        <ValidationSummary />
+    </div>
+</EditForm>
 
 
 
@@ -56,9 +63,9 @@
     private Item item = new Item();
     private string PriceCalc()
     {
-        return $"{calculation().ToString()} NZD";
+        return $"{calculation().ToString("C")}";
     }
-    private float calculation()
+    private float calculation() // price calculator based on form params
     {
         double boPrice = 1;
         switch (item.Category)
@@ -76,13 +83,10 @@
 
         return (float)boPrice * item.Quantity;
     }
-    private async void OnSubmit()
+    private async void OnSubmit() //request db upon form submit
     {
         item.BuyOutPrice = calculation();
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        int uid = int.Parse(user.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value);
-        //sp_AddItem @ItemName varchar(255), @BuyOutPrice float, @MemberId int, @ItemCat varchar(255) , @ItemSize int, @Qty float
+        var uid = await Common.GetCurrentUserId(AuthenticationStateProvider);
         var p = new ParamList
         {
             ["ItemName"] = item.Name,

@@ -15,7 +15,13 @@
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="2.1.6" />
     <PackageReference Include="BlazorStyled" Version="2.2.0" />
-    <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
+    <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.23.2" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.29.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.29.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +30,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\WEB701BackEnd\WEB701GRPC\WEB701GRPC\Protos\websrv.proto" GrpcServices="Client">
+      <Link>Protos\websrv.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

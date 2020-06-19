@@ -1,14 +1,35 @@
-﻿<style>
+﻿@*Logo at index page*@
+<style>
     .index-logo-logo {
         font-size: 5vw;
         width: 40%;
         @*color: #efe4ca;*@
         margin-top: 10%;
         margin-left: 10%;
+        animation: appear 3s;
+        transition: all 2s
     }
     .index-logo-svg-icon {
         @*fill: #F7FAFC;*@
         fill: #efe4ca;
+    }
+    .index-logo-logo:hover {
+        transform: scale(1.1);
+    }
+    @@keyframes appear {
+        0% {
+            opacity: 0;
+
+        }
+        40% {
+            opacity: 0;
+
+        }
+
+        100% {
+            opacity: 1;
+
+        }
     }
 </style>
 <div class="index-logo-logo">

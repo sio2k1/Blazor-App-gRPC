@@ -1,0 +1,25 @@
+﻿@*Common component to display list of cards structure*@
+@using Web701BlazorApp.Data
+        <div class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+            @foreach (var a in Lst)
+            {
+                string link = $"{PageHandler}/{a.Id}";
+                <NavLink class="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4" href="@link">
+                    <div class="max-w-sm rounded overflow-hidden shadow-md">
+                        <img class="w-full" src="@a.ImageLink" alt="Article IMG">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">@a.Title</div>
+                        </div>
+                    </div>
+                </NavLink>
+            }
+        </div>
+
+
+@code {
+    [Parameter]
+    public string PageHandler { get; set; }
+    [Parameter]
+    public List<Card> Lst { get; set; } = new List<Card>();
+}
+

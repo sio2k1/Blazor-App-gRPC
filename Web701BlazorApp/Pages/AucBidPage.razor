@@ -1,5 +1,5 @@
-﻿@page "/bid"
-
+﻿@*Page used to place bids*@
+@page "/bid"
 
 <Web701BlazorApp.Components.ContentAndFooter>
     <AuthorizeView Roles="sa, client">
@@ -7,7 +7,7 @@
             <Web701BlazorApp.Components.AucBidList></Web701BlazorApp.Components.AucBidList>
         </Authorized>
         <NotAuthorized>
-            <NavLink href="/login">
+            <NavLink href="login">
                 Please sign in to view this content.
             </NavLink>
         </NotAuthorized>

@@ -21,7 +21,11 @@
       <Link>bundleconfig.json</Link>
     </Content>
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)grpc.tools\2.29.0\build\Grpc.Tools.props" Condition="Exists('$(NuGetPackageRoot)grpc.tools\2.29.0\build\Grpc.Tools.props')" />
+  </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgBuildWebCompiler Condition=" '$(PkgBuildWebCompiler)' == '' ">C:\Users\sio\.nuget\packages\buildwebcompiler\1.12.394</PkgBuildWebCompiler>
+    <PkgGrpc_Tools Condition=" '$(PkgGrpc_Tools)' == '' ">C:\Users\sio\.nuget\packages\grpc.tools\2.29.0</PkgGrpc_Tools>
+    <PkgBuildWebCompiler Condition=" '$(PkgBuildWebCompiler)' == '' ">C:\Users\sio\.nuget\packages\buildwebcompiler\1.12.405</PkgBuildWebCompiler>
   </PropertyGroup>
 </Project>

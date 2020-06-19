@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.components.analyzers\3.1.4\buildTransitive\netstandard2.0\Microsoft.AspNetCore.Components.Analyzers.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.components.analyzers\3.1.4\buildTransitive\netstandard2.0\Microsoft.AspNetCore.Components.Analyzers.targets')" />
-    <Import Project="$(NuGetPackageRoot)buildwebcompiler\1.12.394\build\BuildWebCompiler.targets" Condition="Exists('$(NuGetPackageRoot)buildwebcompiler\1.12.394\build\BuildWebCompiler.targets')" />
+    <Import Project="$(NuGetPackageRoot)grpc.tools\2.29.0\build\Grpc.Tools.targets" Condition="Exists('$(NuGetPackageRoot)grpc.tools\2.29.0\build\Grpc.Tools.targets')" />
+    <Import Project="$(NuGetPackageRoot)buildwebcompiler\1.12.405\build\BuildWebCompiler.targets" Condition="Exists('$(NuGetPackageRoot)buildwebcompiler\1.12.405\build\BuildWebCompiler.targets')" />
   </ImportGroup>
 </Project>

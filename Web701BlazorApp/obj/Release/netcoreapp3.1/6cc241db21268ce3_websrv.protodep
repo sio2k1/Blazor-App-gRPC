@@ -1,0 +1,2 @@
+obj\Release\netcoreapp3.1/Websrv.cs \
+obj\Release\netcoreapp3.1/WebsrvGrpc.cs: ../../WEB701BackEnd/WEB701GRPC/WEB701GRPC/Protos/websrv.proto

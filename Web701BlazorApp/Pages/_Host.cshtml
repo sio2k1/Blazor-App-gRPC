@@ -11,7 +11,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web701BlazorApp</title>
-    <base href="~/" />
+
+
+    <environment include="Development">
+        <base href="~/" />
+    </environment>
+    <environment include="Production">
+        <base href="/web701_so/net/" />
+    </environment>
+
+
+    
     <link href="css/site.css" rel="stylesheet" />
     <link href="https://unpkg.com/tailwindcss@@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>

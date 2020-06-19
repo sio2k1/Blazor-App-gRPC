@@ -1,15 +1,23 @@
-﻿@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject NavigationManager NavigationManager
+﻿@*Application main menu*@
 @using WEB701BalzorApp.Auth
+@using Web701BlazorApp.State
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject StateControl StateControl
+
 <div class="w-full block flex-grow md:flex md:items-center md:w-auto">
     <div class="text-sm md:flex-grow">
 
-
+        <NavLink href="">
+            <div class="text-xl block mt-4 md:inline-block md:mt-0 @Color hover:@ColorHover mr-4">
+                Home
+            </div>
+        </NavLink>
 
 
         <AuthorizeView Roles="sa, member">
             <Authorized>
-                <NavLink href="/add">
+                <NavLink href="add">
                     <div class="text-xl block mt-4 md:inline-block md:mt-0 @Color hover:@ColorHover mr-4">
                         Add item
                     </div>
@@ -19,37 +27,52 @@
 
         <AuthorizeView Roles="sa, client">
             <Authorized>
-                <NavLink href="/bid">
+                <NavLink href="bid">
                     <div class="text-xl block mt-4 md:inline-block md:mt-0 @Color hover:@ColorHover mr-4">
                         Auction
                     </div>
                 </NavLink>
             </Authorized>
         </AuthorizeView>
-
-
-        <a href="#responsive-header" class="text-xl block mt-4 md:inline-block md:mt-0 @Color hover:@ColorHover mr-4">
-            Docs
-        </a>
-        <a href="#responsive-header" class="text-xl block mt-4 md:inline-block md:mt-0 @Color hover:@ColorHover mr-4">
-            Docs
-        </a>
-        <a href="#responsive-header" class="text-xl block mt-4 md:inline-block md:mt-0 @Color hover:@ColorHover mr-4">
-            Docs
-        </a>
+        <NavLink href="articles">
+            <div class="text-xl block mt-4 md:inline-block md:mt-0 @Color hover:@ColorHover mr-4">
+                Articles
+            </div>
+        </NavLink>
+        <NavLink href="growers">
+            <div class="text-xl block mt-4 md:inline-block md:mt-0 @Color hover:@ColorHover mr-4">
+                Growers
+            </div>
+        </NavLink>
 
     </div>
     <div>
         <AuthorizeView Roles="sa, member, client">
             <Authorized>
-                <div class="@Color inline-block mr-2">@context.User.Claims.First(x=>x.Type==System.Security.Claims.ClaimTypes.GivenName).Value</div>
-                <button @onclick="@LogOut">
-                <div class="text-sm inline-block px-4 py-2 leading-none border rounded @Color @ColorButtonBorder hover:border-transparent hover:@ColorHover hover:bg-white mt-4 md:mt-0">
-                    Sign Out
-                </div></button>
+                <style>
+                    .menu-account-control:hover .menu-account-submenu {
+                        display: block;
+                    }
+
+                    .menu-account-submenu {
+
+                        z-index: 1;
+                    }
+                </style>
+                <div class="relative inline-block menu-account-control mt-6 mb-6 sm:mt-6 md:mt-0 lg:mt-0 xl:mt-0 sm:mb-6 md:mb-0 lg:mb-0 xl:mb-0">
+                    <div class="@Color inline-block mr-2 underline">@context.User.Claims.First(x => x.Type == System.Security.Claims.ClaimTypes.GivenName).Value</div>
+
+                    <div class="mt-0 py-2 w-25 bg-white rounded-md shadow-xl menu-account-submenu block sm:block md:hidden lg:hidden xl:hidden md:absolute lg:absolute xl:absolute md:w-48 lg:w-48 xl:w-48">
+                        <NavLink href="account">
+                            <div class="text-sm block px-4 py-2 text-gray-800 hover:bg-gray-800 hover:text-white">Account settings</div>
+                        </NavLink>
+                        <NavLink href="" @onclick="@LogOut"><div class="text-sm block px-4 py-2 text-gray-800 hover:bg-gray-800 hover:text-white">Sign out</div></NavLink>
+                    </div>
+                </div>
+
             </Authorized>
             <NotAuthorized>
-                <NavLink href="/login">
+                <NavLink href="login">
                     <div class="text-sm inline-block px-4 py-2 leading-none border rounded @Color @ColorButtonBorder hover:border-transparent hover:@ColorHover hover:bg-white mt-4 md:mt-0">
                         Sign In
                     </div>
@@ -59,37 +82,6 @@
 
     </div>
 </div>
-
-@*<ul class="flex">
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Active</a>
-        </li>
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Link</a>
-        </li>
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Link</a>
-        </li>
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Active</a>
-        </li>
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Link</a>
-        </li>
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Link</a>
-        </li>
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Active</a>
-        </li>
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Link</a>
-        </li>
-        <li class="mr-6">
-            <a class="text-xl @Color hover:@ColorHover" href="#">Link</a>
-        </li>
-
-    </ul>*@
 
 @code {
     [Parameter]
@@ -103,6 +95,15 @@
     {
         await ((BasicAuthStateProvider)AuthenticationStateProvider).MarkUserAsLoggedOut();
         this.StateHasChanged();
+    }
+
+    protected override void OnInitialized()
+    {
+        StateControl.UserNameChange.OnChange += this.StateHasChanged;
+    }
+    public void Dispose()
+    {
+        StateControl.UserNameChange.OnChange-= this.StateHasChanged;
     }
 
 }
