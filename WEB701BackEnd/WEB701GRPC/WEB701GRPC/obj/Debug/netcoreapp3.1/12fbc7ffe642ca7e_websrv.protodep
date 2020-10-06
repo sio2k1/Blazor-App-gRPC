@@ -1,0 +1,2 @@
+obj\Debug\netcoreapp3.1/Websrv.cs \
+obj\Debug\netcoreapp3.1/WebsrvGrpc.cs: Protos/websrv.proto

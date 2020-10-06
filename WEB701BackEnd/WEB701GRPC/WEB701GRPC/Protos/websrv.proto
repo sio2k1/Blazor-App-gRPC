@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "WEB701GRPC.Protos";
+
+package greet;
+
+// service definition.
+service Web701 {
+  // Sends a greeting
+  rpc GetArticleList (GetArticleListRequest) returns (ArticleListReply);
+}
+
+// The request message 
+message GetArticleListRequest { 
+
+}
+// The response message containing the list of articles
+message ArticleListReply {
+  repeated Article articles = 1;
+  string errorMsg = 2;
+}
+message Article {
+	int32 id = 1;
+	string title = 2;
+	string text = 3;
+	string imageLink =4;
+}
