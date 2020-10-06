@@ -8,14 +8,14 @@
 </Web701BlazorApp.Components.ContentAndFooter>
 
 @code {
-    List<Card> lst = new List<Card>();
+    List<CardModel> lst = new List<CardModel>();
     protected override async Task OnInitializedAsync()
     {
         try
         {
             lst.Clear();
             List<Article> articles = await gRPCClient.GetArticleList();
-            articles.ForEach(a => lst.Add(new Card { Text = a.Text, Id = a.Id, ImageLink = a.ImageLink, Title = a.Title })); //convert article to card, to use it with card component
+            articles.ForEach(a => lst.Add(new CardModel { Text = a.Text, Id = a.Id, ImageLink = a.ImageLink, Title = a.Title })); //convert article to card, to use it with card component
         }
         catch (Exception e)
         {

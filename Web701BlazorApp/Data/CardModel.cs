@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Web701BlazorApp.Data
 {
-    public class Card //card data class for displaying cards (articles, growers)
+    public class CardModel //card data class for displaying cards (articles, growers)
     {
         public int Id { get; set; }
         public string Title { get; set; }

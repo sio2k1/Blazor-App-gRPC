@@ -23,7 +23,7 @@ namespace WEB701BalzorApp.Auth
 
         }
 
-        public async Task MarkUserAsAuthenticated(User user) //on successful auth, claa this to set user and save token for session restore.
+        public async Task MarkUserAsAuthenticated(UserModel user) //on successful auth, claa this to set user and save token for session restore.
         {
             await _localStorageService.SetItemAsync("token", user.uToken);
             var identity = GetClaimsIdentity(user);
@@ -52,7 +52,7 @@ namespace WEB701BalzorApp.Auth
 
                 try
                 {
-                    List <User> users = DBExecuter.SQLRequestSPAutoFillParams("sp_VerifyUserByToken", new ParamList { ["token"] = token, ["extrainfo"] = xtra }).Map<User>(); //token auth
+                    List <UserModel> users = DBExecuter.SQLRequestSPAutoFillParams("sp_VerifyUserByToken", new ParamList { ["token"] = token, ["extrainfo"] = xtra }).Map<UserModel>(); //token auth
                     if (users.Count == 1)
                     {
                         identity = GetClaimsIdentity(users.FirstOrDefault());
@@ -74,7 +74,7 @@ namespace WEB701BalzorApp.Auth
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 
-        private ClaimsIdentity GetClaimsIdentity(User user) //create claims based on user object
+        private ClaimsIdentity GetClaimsIdentity(UserModel user) //create claims based on user object
         {
                        var claimsIdentity = new ClaimsIdentity(new[]
                                 {

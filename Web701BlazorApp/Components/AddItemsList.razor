@@ -77,7 +77,7 @@
 </div>
 
 @code {
-    private List<Item> items = new List<Item>();
+    private List<ItemModel> items = new List<ItemModel>();
     private event Action Unsubscribe;
     public async Task Reload()
     {
@@ -86,7 +86,7 @@
         int uid = int.Parse(user.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value);
         try
         {
-            items = DBExecuter.SQLRequestSPAutoFillParams("sp_GetItemsByUserId", new ParamList { ["id"] = uid }).Map<Item>(); //get items by grower id
+            items = DBExecuter.SQLRequestSPAutoFillParams("sp_GetItemsByUserId", new ParamList { ["id"] = uid }).Map<ItemModel>(); //get items by grower id
         }
         catch (Exception e)
         {

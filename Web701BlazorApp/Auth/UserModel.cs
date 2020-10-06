@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WEB701BalzorApp.Auth
 {
-    public class User //user data class
+    public class UserModel //user data class
     {
         public int id { get; set; }
         public string uLogin { get; set; }

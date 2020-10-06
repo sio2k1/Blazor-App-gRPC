@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Web701BlazorApp.Data
 {
-    public class UserDetails // data class to represent and validate user details
+    public class UserDetailsModel // data class to represent and validate user details
     {
         [StringLength(255)]
         public string uName { get; set; }
 
     }
-    public class GrowerDetails: UserDetails
+    public class GrowerDetails: UserDetailsModel
     {
         [StringLength(255)]
         public string uDescription { get; set; }

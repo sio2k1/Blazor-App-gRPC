@@ -16,13 +16,13 @@
 @code {
     [Parameter]
     public string id { get; set; }
-    private Card GrowerItem { get; set; } = new Card();
+    private CardModel GrowerItem { get; set; } = new CardModel();
 
     protected override void OnInitialized()
     {
         try
         {
-            GrowerItem = DBExecuter.SQLRequestSPAutoFillParams("sp_GetGrowerList", new ParamList { ["id"] = int.Parse(id) }).Map<Card>().First();
+            GrowerItem = DBExecuter.SQLRequestSPAutoFillParams("sp_GetGrowerList", new ParamList { ["id"] = int.Parse(id) }).Map<CardModel>().First();
         }
         catch (Exception e)
         {

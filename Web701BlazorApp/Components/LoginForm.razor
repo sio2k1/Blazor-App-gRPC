@@ -46,7 +46,7 @@
 @code {
     bool incorrectPWD = false;
 
-    private User user = new User();
+    private UserModel user = new UserModel();
     protected override async void OnInitialized()
     {
         string info = "";
@@ -73,10 +73,10 @@
             ["extrainfo"] = xtra
         };
 
-        List<User> u = new List<User>();
+        List<UserModel> u = new List<UserModel>();
         try
         {
-            u = DBExecuter.SQLRequestSPAutoFillParams("sp_VerifyUserByLoginPassword", p).Map<User>(); //request db if user exists there
+            u = DBExecuter.SQLRequestSPAutoFillParams("sp_VerifyUserByLoginPassword", p).Map<UserModel>(); //request db if user exists there
         }
         catch (Exception e)
         {

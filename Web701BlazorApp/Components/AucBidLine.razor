@@ -37,7 +37,7 @@
 
 @code {
     [Parameter]
-    public Item item { get; set; }
+    public ItemModel item { get; set; }
     [Parameter]
     public int CurrentUserId { get; set; }
 
@@ -46,7 +46,7 @@
     private float lastBid = 0;
     private float getBidValue() // generate next bid ammount
     {
-        return (item.CurrentBid + 5) > item.BuyOutPrice ? item.BuyOutPrice : (item.CurrentBid + 5); 
+        return (item.CurrentBid + 5) > item.BuyOutPrice ? item.BuyOutPrice : (item.CurrentBid + 5);
     }
 
 

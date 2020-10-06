@@ -8,12 +8,12 @@
     </Web701BlazorApp.Components.ContentAndFooter>
 
 @code {
-    List<Card> lst = new List<Card>();
+    List<CardModel> lst = new List<CardModel>();
     protected override void OnInitialized()
     {
         try
         {
-            lst = DBExecuter.SQLRequestSPAutoFillParams("sp_GetGrowerList", new ParamList { ["id"] = -1 }).Map<Card>();
+            lst = DBExecuter.SQLRequestSPAutoFillParams("sp_GetGrowerList", new ParamList { ["id"] = -1 }).Map<CardModel>();
         }
         catch (Exception e)
         {

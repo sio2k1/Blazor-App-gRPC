@@ -37,14 +37,14 @@
 </div>
 
 @code {
-    private List<Item> items = new List<Item>();
+    private List<ItemModel> items = new List<ItemModel>();
     private event Action Unsubscribe;
     int uid = -1;
     public async void Reload() //reloads items in list
     {
         try
         {
-            items = DBExecuter.SQLRequestSPAutoFillParams("sp_GetItemsForAucList", new ParamList()).Map<Item>();
+            items = DBExecuter.SQLRequestSPAutoFillParams("sp_GetItemsForAucList", new ParamList()).Map<ItemModel>();
             uid = await Common.GetCurrentUserId(AuthenticationStateProvider);
         }
         catch (Exception e)

@@ -23,12 +23,12 @@
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="item">Item Quantity</label>
-            <InputNumber @bind-Value="item.Quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Quantity" id="itemqty" />
+            <InputNumber @bind-Value="item.Quantity" class="shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Item Quantity" id="itemqty" />
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="itemcat">Item Category</label>
             <div class="relative">
-                <InputSelect @bind-Value="item.Category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="itemcat">
+                <InputSelect @bind-Value="item.Category" class="block appearance-none w-full h-12 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="itemcat">
                     <option value="">Select category ...</option>
                     <option value="extra">Extra</option>
                     <option value="1st">I</option>
@@ -60,7 +60,7 @@
 
 
 @code {
-    private Item item = new Item();
+    private ItemModel item = new ItemModel();
     private string PriceCalc()
     {
         return $"{calculation().ToString("C")}";

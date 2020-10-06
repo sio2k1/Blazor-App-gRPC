@@ -4,6 +4,81 @@
     "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\WEB701\\WEB701PRJ\\Web701BlazorApp\\Web701BlazorApp.csproj": {}
   },
   "projects": {
+    "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SettingsManager\\SettingsManager.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SettingsManager\\SettingsManager.csproj",
+        "projectName": "SettingsManager",
+        "projectPath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SettingsManager\\SettingsManager.csproj",
+        "packagesPath": "C:\\Users\\sio\\.nuget\\packages\\",
+        "outputPath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SettingsManager\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[4.7.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SQLReflectionMapper\\SQLReflectionMapper.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -30,7 +105,11 @@
         },
         "frameworks": {
           "netstandard2.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SettingsManager\\SettingsManager.csproj": {
+                "projectPath": "E:\\@SkyDrive\\SkyDrive\\@backup\\@nmit\\@PRJ\\@DEV\\netCore\\backend\\SettingsManager\\SettingsManager.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -62,7 +141,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -153,7 +232,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
